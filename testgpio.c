@@ -251,6 +251,6 @@ void poll_all_port_status()
 			printf("get port %d status failed\n",(test_num+1));
 		}
 		test_num = (++test_num > 7 ? 0 : test_num );
-		usleep(10*1000);
+		//usleep(10*1000);
 	}
 }

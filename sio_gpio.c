@@ -312,32 +312,6 @@ static long gpio_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 			}
 			spin_unlock(&sio_lock);
 			return rc;
-		case SET_LED_HIGHLEVEL:
-			spin_lock(&sio_lock);
-			if (get_user(pin_index, (u8 __user *)arg)){
-				spin_unlock(&sio_lock);
-				return -EFAULT;
-			}
-			if(pin_index > MAX_PCH_GPIO_PIN){
-				spin_unlock(&sio_lock);
-				return -EINVAL;
-			}
-			pch_gpio_set_bit(*(LED_base_addr+pin_index),31);
-			spin_unlock(&sio_lock);
-			return rc;
-		case SET_LED_LOWLEVEL:
-			spin_lock(&sio_lock);
-			if (get_user(pin_index, (u8 __user *)arg)){
-				spin_unlock(&sio_lock);
-				return -EFAULT;
-			}
-			if(pin_index > MAX_PCH_GPIO_PIN){
-				spin_unlock(&sio_lock);
-				return -EINVAL;
-			}
-			pch_gpio_clear_bit(*(LED_base_addr+pin_index),31);
-			spin_unlock(&sio_lock);
-			return rc;
 	default:
 		return -ENOTTY;
 	}
